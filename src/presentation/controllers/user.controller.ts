@@ -22,7 +22,7 @@ export class UserController {
 
     if (!createdUser) return response.status(400).json({ message });
 
-    if (errorMessage) response.status(500).json({ errorMessage });
+    if (errorMessage) return response.status(500).json({ errorMessage });
 
     return response.status(200).json({ message, createdUser });
   }
