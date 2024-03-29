@@ -10,6 +10,9 @@ import { CategoryEntity } from './domain/entities/category.entity';
 import { ProductController } from 'src/presentation/controllers/product.controller';
 import { ProductService } from 'src/application/service/product.service';
 import { ProductEntity } from './domain/entities/product.entity';
+import { UserEntity } from './domain/entities/user.entity';
+import { UserController } from './presentation/controllers/user.controller';
+import { UserService } from './application/service/user.service';
 
 @Module({
   imports: [
@@ -17,12 +20,12 @@ import { ProductEntity } from './domain/entities/product.entity';
       useClass: PostgresConfigService,
       inject: [PostgresConfigService],
     }),
-    TypeOrmModule.forFeature([ProductEntity, CategoryEntity]),
+    TypeOrmModule.forFeature([CategoryEntity, ProductEntity, UserEntity]),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
   ], // Imports in general
-  controllers: [ProductController, CategoryController], // Controllers
-  providers: [ProductService, CategoryService], // Service
+  controllers: [CategoryController, ProductController, UserController], // Controllers
+  providers: [CategoryService, ProductService, UserService], // Service
 })
 export class AppModule {}
