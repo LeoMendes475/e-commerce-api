@@ -5,6 +5,7 @@ import { v4 as uuid } from 'uuid';
 
 import { ProductEntity } from 'src/domain/entities/product.entity';
 import { CreateProductDto, EditProductDto } from 'src/application/dto/product';
+import { UserEntity } from 'src/domain/entities/user.entity';
 
 @Injectable()
 export class ProductService {
@@ -13,7 +14,7 @@ export class ProductService {
     private readonly productRepository: Repository<ProductEntity>,
   ) {}
 
-  async createProduct(dto: CreateProductDto) {
+  async createProduct(dto: CreateProductDto, loggedUser: UserEntity) {
     const product = new ProductEntity();
 
     product.id = uuid();
