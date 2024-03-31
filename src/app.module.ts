@@ -1,20 +1,21 @@
+import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
 
-import { PostgresConfigService } from './config/postgres.config.service';
-
+import { AuthController } from './presentation/controllers/auth.controller';
+import { AuthService } from './application/service/auth.service';
 import { CategoryController } from 'src/presentation/controllers/category.controller';
 import { CategoryService } from 'src/application/service/category.service';
 import { CategoryEntity } from './domain/entities/category.entity';
+import { JwtModule } from '@nestjs/jwt';
+import { LocalStrategy } from './strategies/local.strategy';
+import { PostgresConfigService } from './config/postgres.config.service';
 import { ProductController } from 'src/presentation/controllers/product.controller';
 import { ProductService } from 'src/application/service/product.service';
 import { ProductEntity } from './domain/entities/product.entity';
 import { UserEntity } from './domain/entities/user.entity';
 import { UserController } from './presentation/controllers/user.controller';
 import { UserService } from './application/service/user.service';
-import { AuthController } from './presentation/controllers/auth.controller';
-import { AuthService } from './application/service/auth.service';
 
 @Module({
   imports: [
@@ -26,6 +27,10 @@ import { AuthService } from './application/service/auth.service';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '1h' },
+    }),
   ],
   controllers: [
     AuthController,
@@ -33,6 +38,12 @@ import { AuthService } from './application/service/auth.service';
     ProductController,
     UserController,
   ],
-  providers: [AuthService, CategoryService, ProductService, UserService], // Service
+  providers: [
+    AuthService,
+    CategoryService,
+    LocalStrategy,
+    ProductService,
+    UserService,
+  ],
 })
 export class AppModule {}

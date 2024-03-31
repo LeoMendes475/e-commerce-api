@@ -20,7 +20,7 @@ export class UserService {
     return usersList;
   }
 
-  async findUserByEmail(email: string) {
+  async findByEmail(email: string) {
     const user = await this.userRepository.findOne({
       where: {
         email,
@@ -31,7 +31,7 @@ export class UserService {
   }
 
   async createUser(dto: CreateUserDto) {
-    const existUser = await this.findUserByEmail(dto.email);
+    const existUser = await this.findByEmail(dto.email);
 
     if (existUser) return { message: 'User already existy.' };
 
