@@ -13,6 +13,8 @@ import { ProductEntity } from './domain/entities/product.entity';
 import { UserEntity } from './domain/entities/user.entity';
 import { UserController } from './presentation/controllers/user.controller';
 import { UserService } from './application/service/user.service';
+import { AuthController } from './presentation/controllers/auth.controller';
+import { AuthService } from './application/service/auth.service';
 
 @Module({
   imports: [
@@ -24,8 +26,13 @@ import { UserService } from './application/service/user.service';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-  ], // Imports in general
-  controllers: [CategoryController, ProductController, UserController], // Controllers
-  providers: [CategoryService, ProductService, UserService], // Service
+  ],
+  controllers: [
+    AuthController,
+    CategoryController,
+    ProductController,
+    UserController,
+  ],
+  providers: [AuthService, CategoryService, ProductService, UserService], // Service
 })
 export class AppModule {}
