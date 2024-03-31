@@ -1,3 +1,4 @@
+import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -7,6 +8,7 @@ import { AuthService } from './application/service/auth.service';
 import { CategoryController } from 'src/presentation/controllers/category.controller';
 import { CategoryService } from 'src/application/service/category.service';
 import { CategoryEntity } from './domain/entities/category.entity';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { JwtModule } from '@nestjs/jwt';
 import { LocalStrategy } from './strategies/local.strategy';
 import { PostgresConfigService } from './config/postgres.config.service';
@@ -44,6 +46,10 @@ import { UserService } from './application/service/user.service';
     LocalStrategy,
     ProductService,
     UserService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
   ],
 })
 export class AppModule {}
