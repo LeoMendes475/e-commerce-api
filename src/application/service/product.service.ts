@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { IsNull } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
 import { ProductEntity } from 'src/domain/entities/product.entity';
@@ -60,7 +61,10 @@ export class ProductService {
   }
 
   async deleteProduct(id: string) {
-    const productEntity = await this.productRepository.findOneBy({ id });
+    const productEntity = await this.productRepository.findOneBy({
+      id,
+      deletedAt: IsNull(),
+    });
 
     if (productEntity === null) {
       throw new NotFoundException('The product was not found');
