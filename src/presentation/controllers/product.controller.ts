@@ -22,10 +22,7 @@ export class ProductController {
 
   @IsPublic()
   @Get()
-  async listAllProducts(
-    @Res() response: Response,
-    @CurrentUser() loggedUser: UserEntity,
-  ) {
+  async listAllProducts(@Res() response: Response) {
     const productList = await this.productService.listAllProducts();
 
     return response.status(200).json(productList);

@@ -26,8 +26,6 @@ export class OrderService {
     order.userCreatedId = '10b8690c-7608-4052-a012-9c5125fbd5ab';
     order.createdAt = new Date();
 
-    console.log('Order: ', order);
-
     const createdOrder = await this.orderRepository.save(order);
 
     return {

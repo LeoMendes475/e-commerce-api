@@ -3,11 +3,13 @@ import { Response } from 'express';
 import { CreateUserDto } from 'src/application/dto/user';
 
 import { UserService } from 'src/application/service/user.service';
+import { IsPublic } from 'src/decorators/is-public.decorator';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
+  @IsPublic()
   @Get()
   async allUsers(@Res() response: Response): Promise<any> {
     const usersList = await this.userService.getAllUsers();
