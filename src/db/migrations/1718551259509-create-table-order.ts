@@ -67,11 +67,13 @@ export class CreateTableOrder1718551259509 implements MigrationInterface {
                         name: 'userUpdatedId',
                         type: 'varchar',
                         length: '36',
+                        isNullable: true,
                     },
                     {
                         name: 'userDeletedId',
                         type: 'varchar',
                         length: '36',
+                        isNullable: true,
                     },
                     {
                         name: 'createdAt',

@@ -11,6 +11,9 @@ import { CategoryEntity } from './domain/entities/category.entity';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { JwtModule } from '@nestjs/jwt';
 import { LocalStrategy } from './strategies/local.strategy';
+import { OrderController } from './presentation/controllers/order.controller';
+import { OrderEntity } from './domain/entities/order.entity';
+import { OrderService } from './application/service/order.service';
 import { PostgresConfigService } from './config/postgres.config.service';
 import { ProductController } from 'src/presentation/controllers/product.controller';
 import { ProductService } from 'src/application/service/product.service';
@@ -25,7 +28,12 @@ import { UserService } from './application/service/user.service';
       useClass: PostgresConfigService,
       inject: [PostgresConfigService],
     }),
-    TypeOrmModule.forFeature([CategoryEntity, ProductEntity, UserEntity]),
+    TypeOrmModule.forFeature([
+      CategoryEntity,
+      OrderEntity,
+      ProductEntity,
+      UserEntity,
+    ]),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -37,6 +45,7 @@ import { UserService } from './application/service/user.service';
   controllers: [
     AuthController,
     CategoryController,
+    OrderController,
     ProductController,
     UserController,
   ],
@@ -44,6 +53,7 @@ import { UserService } from './application/service/user.service';
     AuthService,
     CategoryService,
     LocalStrategy,
+    OrderService,
     ProductService,
     UserService,
     {
@@ -52,4 +62,4 @@ import { UserService } from './application/service/user.service';
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }
