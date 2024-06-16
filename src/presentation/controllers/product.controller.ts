@@ -14,11 +14,13 @@ import { ProductService } from 'src/application/service/product.service';
 import { CreateProductDto, EditProductDto } from 'src/application/dto/product';
 import { CurrentUser } from 'src/decorators/current-user.decorator';
 import { UserEntity } from 'src/domain/entities/user.entity';
+import { IsPublic } from 'src/decorators/is-public.decorator';
 
 @Controller('product')
 export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(private readonly productService: ProductService) { }
 
+  @IsPublic()
   @Get()
   async listAllProducts(
     @Res() response: Response,
