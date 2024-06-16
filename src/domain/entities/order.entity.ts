@@ -17,19 +17,19 @@ export class OrderEntity {
   @OneToOne(() => UserEntity, (user) => user.id)
   user: UserEntity;
 
-  @Column({ name: 'categoryId', nullable: false })
+  @Column({ name: 'userId', nullable: false })
   userId: string;
 
-  @Column({ name: 'description', length: 100 })
+  @Column({ name: 'buyerName', length: 100, nullable: false })
   buyerName: string;
 
-  @Column({ name: 'buyerPassport', length: 6 })
+  @Column({ name: 'buyerPassport', length: 6, nullable: false })
   buyerPassport: string;
 
-  @Column({ name: 'buyerOrganization', length: 100 })
+  @Column({ name: 'buyerOrganization', length: 100, nullable: false })
   buyerOrganization: string;
 
-  @Column({ name: 'orderQuantity' })
+  @Column({ name: 'orderQuantity', nullable: false })
   orderQuantity: number;
 
   @OneToOne(() => ProductEntity, (product) => product.id)
@@ -41,13 +41,13 @@ export class OrderEntity {
   @Column({ name: 'userCreatedId', nullable: false })
   userCreatedId: string;
 
-  @Column({ name: 'userUpdatedId', nullable: false })
+  @Column({ name: 'userUpdatedId' })
   userUpdatedId: string;
 
-  @Column({ name: 'userDeletedId', nullable: false })
+  @Column({ name: 'userDeletedId' })
   userDeletedId: string;
 
-  @CreateDateColumn({ name: 'sellDate' })
+  @CreateDateColumn({ name: 'sellDate', nullable: false })
   sellDate: Date;
 
   @CreateDateColumn({ name: 'createdAt' })
